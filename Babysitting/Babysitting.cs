@@ -4,9 +4,11 @@ namespace BabysittingBusinessLogic
 {
     public class Babysitting
     {
-        public void Start(DateTime dateTime)
+        public DateTime Start(DateTime dateTime)
         {
-            throw new ArgumentOutOfRangeException();
+            if (dateTime.Hour<5)
+                throw new ArgumentOutOfRangeException();
+            return dateTime;
         }
     }
 }
