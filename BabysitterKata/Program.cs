@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BabysitterKata
+namespace Babysitter
 {
     class Program
     {
