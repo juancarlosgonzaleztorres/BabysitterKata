@@ -10,5 +10,10 @@ namespace BabysittingBusinessLogic
                 throw new ArgumentOutOfRangeException();
             return dateTime;
         }
+
+        public DateTime End(DateTime time)
+        {
+            return time;
+        }
     }
 }

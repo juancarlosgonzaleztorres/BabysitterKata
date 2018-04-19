@@ -14,9 +14,11 @@ namespace BabysitterUnitTests
         private int hour;
         private int minute;
         private int second;
+        Babysitting babysitting;
 
         public BabysitterTests()
         {
+            babysitting = new Babysitting();
             year = 2018;
             month = 4;
             day = 17;
@@ -27,18 +29,23 @@ namespace BabysitterUnitTests
 
         [TestMethod]
         public void StartEarlierThan5pmThrowArgumentOutOfRangeException()
-        {
-            Babysitting babysitting = new Babysitting();
-
+        {            
             Assert.ThrowsException<ArgumentOutOfRangeException>(()=>babysitting.Start(new DateTime()));
         }
 
         [TestMethod]        
         public void StartAtOrAfter5pmIsAccepted()
-        {
-            Babysitting babysitting = new Babysitting();
+        {           
             var start = new DateTime(year, month, day, hour, minute, second);
             Assert.AreEqual(start, babysitting.Start(start));
+        }
+
+        [TestMethod]
+        public void LeavesNotLaterThan4am()
+        {
+            hour = 4;
+            var time = new DateTime(year, month, day, hour, minute, second);
+            Assert.AreEqual(time, babysitting.End(time));
         }
     }
 }
