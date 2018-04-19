@@ -30,14 +30,14 @@ namespace BabysitterUnitTests
         [TestMethod]
         public void StartEarlierThan5pmThrowArgumentOutOfRangeException()
         {            
-            Assert.ThrowsException<ArgumentOutOfRangeException>(()=>babysitting.Start(new DateTime()));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(()=>babysitting.StartTime(new DateTime()));
         }
 
         [TestMethod]        
         public void StartAtOrAfter5pmIsAccepted()
         {           
             var start = new DateTime(year, month, day, hour, minute, second);
-            Assert.AreEqual(start, babysitting.Start(start));
+            Assert.AreEqual(start, babysitting.StartTime(start));
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace BabysitterUnitTests
         {
             hour = 4;
             var time = new DateTime(year, month, day, hour, minute, second);
-            Assert.AreEqual(time, babysitting.End(time));
+            Assert.AreEqual(time, babysitting.EndTime(time));
         }
 
         [TestMethod]
@@ -54,7 +54,27 @@ namespace BabysitterUnitTests
             hour = 4;
             minute = 1;
             var time = new DateTime(year, month, day, hour, minute, second);
-            Assert.ThrowsException<ArgumentOutOfRangeException>(()=>babysitting.Start(time));
-        }        
+            Assert.ThrowsException<ArgumentOutOfRangeException>(()=>babysitting.EndTime(time));
+        }
+
+        [TestMethod]
+        public void SetBedTime()
+        {
+            var startTime = new DateTime(year, month, 17, 17, minute, second);
+            babysitting.StartTime(startTime);
+            var endTime = new DateTime(year, month, 18, 4, minute, second);
+            babysitting.EndTime(endTime);
+            var bedTime = new DateTime(year, month, 17, 20, minute, second);
+
+            Assert.AreEqual(bedTime, babysitting.BedTime(bedTime));
+        }
+
+        [TestMethod]
+        public void BedTimeOutOfBabysittingHoursThrowsException()
+        {
+            hour = 5;
+            var time = new DateTime(year, month, day, hour, minute, second);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => babysitting.BedTime(time));
+        }
     }
 }
