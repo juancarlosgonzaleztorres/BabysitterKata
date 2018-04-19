@@ -47,5 +47,14 @@ namespace BabysitterUnitTests
             var time = new DateTime(year, month, day, hour, minute, second);
             Assert.AreEqual(time, babysitting.End(time));
         }
+
+        [TestMethod]
+        public void LeavesAfter4amThrowArgumentOutOfRangeException()
+        {
+            hour = 4;
+            minute = 1;
+            var time = new DateTime(year, month, day, hour, minute, second);
+            Assert.ThrowsException<ArgumentOutOfRangeException>(()=>babysitting.Start(time));
+        }        
     }
 }
