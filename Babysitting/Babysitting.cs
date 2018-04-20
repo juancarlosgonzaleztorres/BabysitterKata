@@ -25,6 +25,7 @@ namespace BabysittingBusinessLogic
         {
             if (bedTime < startTime || bedTime > endTime )
                 throw new ArgumentOutOfRangeException();
+            this.bedTime = bedTime;
             return bedTime;
         }
 
@@ -38,7 +39,11 @@ namespace BabysittingBusinessLogic
 
         public int CalculatePayment()
         {
-            return 48;
+            int totalPayment = (bedTime - startTime).Hours * 12;
+            if(endTime>bedTime)
+                totalPayment += (24 - bedTime.Hour) * 8;
+
+            return totalPayment;
         }
     }
 }
