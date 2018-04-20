@@ -76,5 +76,18 @@ namespace BabysitterUnitTests
             var time = new DateTime(year, month, day, hour, minute, second);
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => babysitting.BedTime(time));
         }
+
+        [TestMethod]
+        public void GetsPaid12PerHourFromStartToBedtime()
+        {
+            var startTime = new DateTime(year, month, 17, 17, minute, second);
+            babysitting.StartTime(startTime);
+            var endTime = new DateTime(year, month, 18, 4, minute, second);
+            babysitting.EndTime(endTime);
+            var bedTime = new DateTime(year, month, 17, 20, minute, second);
+            babysitting.EndTime(bedTime);
+
+            Assert.AreEqual(48, babysitting.CalculatePayment());
+        }
     }
 }

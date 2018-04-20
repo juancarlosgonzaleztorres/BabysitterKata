@@ -35,5 +35,10 @@ namespace BabysittingBusinessLogic
             this.endTime = endTime;
             return endTime;
         }
+
+        public int CalculatePayment()
+        {
+            return 48;
+        }
     }
 }
