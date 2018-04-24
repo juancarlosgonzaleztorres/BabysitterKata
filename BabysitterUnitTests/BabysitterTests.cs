@@ -89,7 +89,7 @@ namespace BabysitterUnitTests
             babysitting.EndTime(endTime);
             babysitting.BedTime(bedTime);
 
-            Assert.AreEqual(12*4, babysitting.CalculatePayment());
+            Assert.AreEqual(12*4, babysitting.CalculateNightlyCharge());
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace BabysitterUnitTests
             babysitting.EndTime(endTime);            
             babysitting.BedTime(bedTime);
 
-            Assert.AreEqual(8*3, babysitting.CalculatePayment());
+            Assert.AreEqual(8*3, babysitting.CalculateNightlyCharge());
         }
 
         [TestMethod]
@@ -111,7 +111,7 @@ namespace BabysitterUnitTests
             babysitting.StartTime(startTime);
             babysitting.EndTime(endTime);            
 
-            Assert.AreEqual(16*4, babysitting.CalculatePayment());
+            Assert.AreEqual(16*4, babysitting.CalculateNightlyCharge());
         }
     }
 }

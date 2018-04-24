@@ -37,7 +37,7 @@ namespace BabysittingBusinessLogic
             return endTime;
         }
 
-        public int CalculatePayment()
+        public int CalculateNightlyCharge()
         {
             int totalPayment = calculateStartToBedTimeHours()       * 12 
                              + calculateBedTimeToMidnightHours()    * 8 
