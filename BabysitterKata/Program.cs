@@ -16,10 +16,10 @@ namespace Babysitter
                     Console.WriteLine("Babysitter Kata");
                     Console.WriteLine("Instructions: Enter date and hour where requested. Example 4/24/2018 5pm");
                     Console.WriteLine("For finishing the program press Ctrl+C\n");
-                    Console.Write("Start hour: ");
+                    Console.Write("Start time: ");
                     var startHour = Console.ReadLine();
                     babysitting.StartTime(DateTime.Parse(startHour));
-                    Console.Write("End hour: ");
+                    Console.Write("End time: ");
                     var endHour = Console.ReadLine();
                     babysitting.EndTime(DateTime.Parse(endHour));
                     Console.Write("Bed time: ");
