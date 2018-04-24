@@ -23,7 +23,7 @@ namespace BabysitterUnitTests
             year = 2018;
             month = 4;
             day = 17;
-            hour = 5;
+            hour = 17;
             minute = 0;
             second = 0;
             startTime = new DateTime(year, month, 17, 17, minute, second);
@@ -84,21 +84,34 @@ namespace BabysitterUnitTests
         [TestMethod]
         public void GetsPaid12PerHourFromStartToBedtime()
         {            
-            babysitting.StartTime(startTime);           
-            babysitting.EndTime(bedTime);            
+            babysitting.StartTime(startTime);
+            endTime = bedTime;
+            babysitting.EndTime(endTime);
             babysitting.BedTime(bedTime);
 
-            Assert.AreEqual(48, babysitting.CalculatePayment());
+            Assert.AreEqual(12*4, babysitting.CalculatePayment());
         }
 
         [TestMethod]
         public void GetsPaid8PerHourFromBedtimeToMidnight()
-        {            
+        {
+            startTime = bedTime;
             babysitting.StartTime(startTime);
-            babysitting.EndTime(endTime);
+            endTime = new DateTime(year, month, 18, 0, minute, second);
+            babysitting.EndTime(endTime);            
             babysitting.BedTime(bedTime);
 
-            Assert.AreEqual(72, babysitting.CalculatePayment());
+            Assert.AreEqual(8*3, babysitting.CalculatePayment());
+        }
+
+        [TestMethod]
+        public void GetsPaid16PerHourFromMidnightToEndJob()
+        {
+            startTime = new DateTime(year, month, 18, 0, minute, second);
+            babysitting.StartTime(startTime);
+            babysitting.EndTime(endTime);            
+
+            Assert.AreEqual(16*4, babysitting.CalculatePayment());
         }
     }
 }

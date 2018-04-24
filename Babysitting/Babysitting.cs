@@ -15,7 +15,7 @@ namespace BabysittingBusinessLogic
 
         public DateTime StartTime(DateTime startTime)
         {
-            if (startTime.Hour<5)
+            if (startTime.Hour>4 && startTime.Hour<17||default(DateTime) == startTime)
                 throw new ArgumentOutOfRangeException();
             this.startTime = startTime;
             return startTime;
@@ -39,11 +39,47 @@ namespace BabysittingBusinessLogic
 
         public int CalculatePayment()
         {
-            int totalPayment = (bedTime - startTime).Hours * 12;
-            if(endTime>bedTime)
-                totalPayment += (24 - bedTime.Hour) * 8;
+            int totalPayment = calculateStartToBedTimeHours()       * 12 
+                             + calculateBedTimeToMidnightHours()    * 8 
+                             + calculateMidnightToEndHours()        * 16;
+            return totalPayment ;
+        }
 
-            return totalPayment;
+        public int calculateStartToBedTimeHours()
+        {
+            int startToBedTimeHours = 0;
+            if (bedTime > startTime)
+                startToBedTimeHours = (bedTime - startTime).Hours;
+            return startToBedTimeHours;
+        }
+
+        public int calculateBedTimeToMidnightHours()
+        {
+            int bedTimeToMidnightHours = 0;
+            if (bedTime == default(DateTime))
+                return 0;
+            if (endTime.Day > bedTime.Day)
+            {
+                bedTimeToMidnightHours = 24 - bedTime.Hour;                
+            }
+            else
+            {
+                bedTimeToMidnightHours = endTime.Hour - bedTime.Hour;
+            }
+                            
+            return bedTimeToMidnightHours;
+        }
+
+        public int calculateMidnightToEndHours()
+        {
+            int midnightToEndHours = 0;
+            if (endTime.Day > startTime.Day)
+            {
+                midnightToEndHours = endTime.Hour;
+            }
+            else if(startTime.Hour<4)
+                midnightToEndHours = endTime.Hour-startTime.Hour;
+            return midnightToEndHours;
         }
     }
 }
